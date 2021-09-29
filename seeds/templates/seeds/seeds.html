@@ -3,9 +3,25 @@
 <title>Seeds</title>
 
 {% block body %}
-    <ul>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Subname</th>
+            <th>Description</th>
+            <th>Sow</th>
+            <th>Harvest</th>
+        </tr>
+
         {% for seed in seeds %}
-            <li>{{ seed }} </li>
+
+        <tr>
+            <td>{{ seed.name }} </td>
+            <td>{{ seed.subname }} </td>
+            <td>{{ seed.description }} </td>
+            <td>{{ seed.sow }} </td>
+            <td>{{ seed.harvest }} </td>
+        </tr>
+
         {% endfor %}
-    </ul>
+    </table>
 {% endblock %}
