@@ -3,10 +3,18 @@
 
 {% block body %}
 <h1>Beds</h1>
-<ul>
-{% for bed in beds %}
-    <li>{{ bed }}</li>
+<table>
+    <tr>
+        <th>Zone</th>
+        <th>Bed Number</th>
+    </tr>
+
+    {% for bed in beds %}
+    <tr>
+        <td>{{ bed.zone }}</td>
+        <td>{{ bed.bed_number }}</td>
+    </tr>
     {% endfor %}
 
-    </ul>
+    </table>
 {% endblock %}
