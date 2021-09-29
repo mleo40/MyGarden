@@ -1,6 +1,12 @@
 {% extends 'seeds/layout.html' %}
 
-<title>Beds</title>
 
+{% block body %}
+<h1>Beds</h1>
+<ul>
+{% for bed in beds %}
+    <li>{{ bed }}</li>
+    {% endfor %}
 
-beds
+    </ul>
+{% endblock %}

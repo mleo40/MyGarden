@@ -1,4 +1,9 @@
 {% extends 'seeds/layout.html'%}
 
 <title>My Garden</title>
-MyGarden home page
+{% block body %}
+<h1>MyGarden Home Page</h1>
+<p><a href = {% url 'seeds' %}>Seeds</a></p>
+<p><a href = {% url 'beds' %}>Beds</a></p>
+<p><a href = {% url 'planting' %}>Planting</a></p>
+{% endblock %}

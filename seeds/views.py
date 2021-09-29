@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Seeds
+from .models import Seeds, PlantingBeds, Planted
 
 
 def index(requests):
-    return HttpResponse("my garden")
+    return render(requests, 'seeds/index.html')
 
 
 def seeds(requests):
@@ -14,7 +14,9 @@ def seeds(requests):
 
 
 def beds(requests):
-    return render(requests, 'seeds/beds.html')
+    return render(requests, 'seeds/beds.html', {
+        "beds": PlantingBeds.objects.all()
+    })
 
 
 def planting(requests):

@@ -1,5 +1,4 @@
 from django.db import models
-import datetime
 
 
 class Seeds(models.Model):
@@ -30,12 +29,15 @@ class PlantingBeds(models.Model):
     """
     Planting bed object
     """
+    zone = models.IntegerField(default=1, choices=((1, "One"),
+                                        (2, "Two"),
+                                        (3, "Three"),
+                                        (4, "Four"),
+                                        (5, "Five")))
     bed_number = models.IntegerField()
-    section = models.CharField(max_length=1, choices=((1, "Top"),
-                                                      (2, "Middle"),
-                                                      (3, "Bottom"),
-                                                      (4, "Left"),
-                                                      (5, "Right")))
+
+    def __str__(self):
+        return f"{self.zone} {self.bed_number}"
 
 
 class Planted(models.Model):
