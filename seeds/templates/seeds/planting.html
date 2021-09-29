@@ -1,4 +1,5 @@
 {% extends 'seeds/layout.html' %}
+{%  load static %}
 
 {% block body %}
 
@@ -14,4 +15,9 @@
     {% endfor %}
 </select>
     <input type="submit" value="PLANT!"/>
+
+    </br>
+    </br>
+<img src="{% static 'seeds/images/the_garden.jpg' %}" alt="A Picture of My Garden"/>
+
 {% endblock %}

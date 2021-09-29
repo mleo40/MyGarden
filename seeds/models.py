@@ -10,6 +10,7 @@ class Seeds(models.Model):
                      ("3", "full sun")
                      )
 
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=64)
     sow = models.DateField(default="2022-05-04")
     subname = models.CharField(max_length=64, blank=True)
@@ -29,6 +30,7 @@ class PlantingBeds(models.Model):
     """
     Planting bed object
     """
+    id = models.AutoField(primary_key=True)
     zone = models.IntegerField(default=1, choices=((1, "One"),
                                         (2, "Two"),
                                         (3, "Three"),
@@ -44,6 +46,7 @@ class Planted(models.Model):
     """
     What's actually been planted
     """
+    id = models.AutoField(primary_key=True)
     seed = models.ForeignKey(Seeds, on_delete=models.CASCADE, related_name='name2')
     location = models.ForeignKey(PlantingBeds, on_delete=models.CASCADE, related_name='bed_number2')
     date = models.DateField()

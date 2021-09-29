@@ -24,3 +24,9 @@ def planting(requests):
         "seeds": Seeds.objects.all(),
         "beds": PlantingBeds.objects.all()
     })
+
+
+def planted(requests):
+    return render(requests, 'seeds/planted.html', {
+        "planted": Planted.objects.all(),
+    })

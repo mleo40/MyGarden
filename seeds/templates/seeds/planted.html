@@ -1,0 +1,26 @@
+{% extends 'seeds/layout.html' %}
+{% load static %}
+
+<title>Planted</title>
+
+{%  block body %}
+ <table>
+        <tr>
+            <th>Seed</th>
+            <th>Location</th>
+            <th>Date Planted</th>
+            <th>Expected Germination</th>
+            <th>Expected Harvest</th>
+            <th>Suggested successor</th>
+        </tr>
+
+        {% for plant in planted %}
+        <tr>
+            <td>{{ plant.seed }} </td>
+            <td>{{ plant.location }} </td>
+            <td>{{ plant.date }} </td>
+            <td>Date planted plus date germinations </td>
+            <td>Date planted plus date harvest </td>
+            <td>Plant this after </td>
+        {% endfor %}
+{% endblock %}
