@@ -20,4 +20,7 @@ def beds(requests):
 
 
 def planting(requests):
-    return render(requests, 'seeds/planting.html')
+    return render(requests, 'seeds/planting.html', {
+        "seeds": Seeds.objects.all(),
+        "beds": PlantingBeds.objects.all()
+    })

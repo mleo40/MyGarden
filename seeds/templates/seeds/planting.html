@@ -3,8 +3,15 @@
 {% block body %}
 
 <h1>This is the purpose of this app (but it doesn't do anything yet!!)!!</h1>
-This page will be a form to fill out info every time you plant something.</br>
-
-Hopefully it will update a calendar with what to plant, when to harvest, and what to plant afterwards.
-
+<select name="seed" id="seed">
+    {%  for seed in seeds %}
+        <option value="{{  seed }}"> {{ seed }}</option>
+    {% endfor %}
+</select>
+<select name="bed" id="bed">
+    {%  for bed in beds %}
+        <option value="{{  bed }}">  {{ bed }}</option>
+    {% endfor %}
+</select>
+    <input type="submit" value="PLANT!"/>
 {% endblock %}

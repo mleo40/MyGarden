@@ -1,5 +1,5 @@
 {% extends 'seeds/layout.html' %}
-
+{%  load static %}
 
 {% block body %}
 <h1>Beds</h1>
@@ -16,5 +16,7 @@
     </tr>
     {% endfor %}
 
-    </table>
+</table>
+<img src="{% static 'seeds/images/the_garden.jpg' %}" alt="A Picture of My Garden"/>
 {% endblock %}
+
