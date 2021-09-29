@@ -16,11 +16,11 @@
 
         {% for plant in planted %}
         <tr>
-            <td>{{ plant.seed }} </td>
-            <td>{{ plant.location }} </td>
-            <td>{{ plant.date }} </td>
-            <td>Date planted plus date germinations </td>
-            <td>Date planted plus date harvest </td>
-            <td>Plant this after </td>
+            <td>{{ plant.seed }}</td>
+            <td>{{ plant.location }}</td>
+            <td>{{ plant.date }}</td>
+            <td>Date planted plus date germination</td>
+            <td>Date planted plus date harvest</td>
+            <td>Plant this after(link to seed)</td>
         {% endfor %}
 {% endblock %}

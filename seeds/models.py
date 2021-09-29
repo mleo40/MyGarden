@@ -31,11 +31,12 @@ class PlantingBeds(models.Model):
     Planting bed object
     """
     id = models.AutoField(primary_key=True)
-    zone = models.IntegerField(default=1, choices=((1, "One"),
-                                        (2, "Two"),
-                                        (3, "Three"),
-                                        (4, "Four"),
-                                        (5, "Five")))
+    zone = models.IntegerField(default=1, choices=((6, "Green house"),
+                                                   (1, "One"),
+                                                   (2, "Two"),
+                                                   (3, "Three"),
+                                                   (4, "Four"),
+                                                   (5, "Five")))
     bed_number = models.IntegerField()
 
     def __str__(self):
