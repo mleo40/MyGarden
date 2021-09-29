@@ -1,0 +1,11 @@
+{% extends 'seeds/layout.html' %}
+
+<title>Seeds</title>
+
+{% block body %}
+    <ul>
+        {% for seed in seeds %}
+            <li>{{ seed }} </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

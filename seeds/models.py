@@ -1,24 +1,47 @@
 from django.db import models
+import datetime
 
 
-class seeds(models.Model):
+class Seeds(models.Model):
     """
-    Creates dbase data for seeds
+    Data for seeds
     """
-    light_options = [(1, "shade"),
-                     (2, "partial sun"),
-                     (3, "full sun")
-                     ]
+    light_options = (("1", "shade"),
+                     ("2", "partial sun"),
+                     ("3", "full sun")
+                     )
 
-    name = models.CharField(max_lenght=64)
-    subname = models.CharField(max_length=64)
+    name = models.CharField(max_length=64)
+    sow = models.DateField(default="2022-05-04")
+    subname = models.CharField(max_length=64, blank=True)
     description = models.CharField(max_length=128)
-    germination = models.IntegerField()
-    date_on_packet = models.DateField()
-    depth = models.IntegerField()
-    light = models.Choices(select=light_options)
-    spacing = models.IntegerField()
+    germination = models.IntegerField(blank=True)
+    date_on_packet = models.DateField(blank=True)
+    depth = models.CharField(max_length=10)
+    light = models.CharField(max_length=1, choices=light_options, blank=True)
+    spacing = models.CharField(max_length=10)
     harvest = models.IntegerField()
 
     def __str__(self):
-        return f"{self.name} {self.subname}"
+        return f"{self.name} {self.subname} {self.harvest} {self.light}"
+
+
+class PlantingBeds(models.Model):
+    """
+    Planting bed object
+    """
+    bed_number = models.IntegerField()
+    section = models.CharField(max_length=1, choices=((1, "Top"),
+                                                      (2, "Middle"),
+                                                      (3, "Bottom"),
+                                                      (4, "Left"),
+                                                      (5, "Right")))
+
+
+class Planted(models.Model):
+    """
+    What's actually been planted
+    """
+    seed = models.ForeignKey(Seeds, on_delete=models.CASCADE, related_name='name2')
+    location = models.ForeignKey(PlantingBeds, on_delete=models.CASCADE, related_name='bed_number2')
+    date = models.DateField()
