@@ -7,6 +7,8 @@
  <table>
         <tr>
             <th>Seed</th>
+            <th>Seed subname</th>
+            <th>Seed description</th>
             <th>Location</th>
             <th>Date Planted</th>
             <th>Expected Germination</th>
@@ -16,7 +18,9 @@
 
         {% for plant in planted %}
         <tr>
-            <td>{{ plant.seed }}</td>
+            <td>{{ plant.seed.name }}</td>
+            <td>{{ plant.seed.subname }}</td>
+            <td>{{ plant.seed.description }}</td>
             <td>{{ plant.location }}</td>
             <td>{{ plant.date }}</td>
             <td>Date planted plus date germination</td>

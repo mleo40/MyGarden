@@ -8,6 +8,9 @@ def index(requests):
 
 
 def seeds(requests):
+    seed_data = Seeds.objects.all()
+    for seed in seed_data:
+        print(seed)
     return render(requests, 'seeds/seeds.html', {
         "seeds": Seeds.objects.all()
     })
@@ -27,6 +30,8 @@ def planting(requests):
 
 
 def planted(requests):
+    #planted_now = Planted.objects.all()
+    # need to calculate date from planted_date and germination/harvest days...somehow
     return render(requests, 'seeds/planted.html', {
         "planted": Planted.objects.all(),
     })

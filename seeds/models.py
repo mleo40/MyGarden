@@ -1,5 +1,6 @@
 from django.db import models
 
+import datetime
 
 class Seeds(models.Model):
     """
@@ -23,7 +24,7 @@ class Seeds(models.Model):
     harvest = models.IntegerField()
 
     def __str__(self):
-        return f"{self.name} {self.subname} {self.harvest} {self.light}"
+        return f"{self.name} {self.subname} {self.harvest} {self.light} {self.harvest} {self.germination}"
 
 
 class PlantingBeds(models.Model):
@@ -31,12 +32,15 @@ class PlantingBeds(models.Model):
     Planting bed object
     """
     id = models.AutoField(primary_key=True)
-    zone = models.IntegerField(default=1, choices=((6, "Green house"),
-                                                   (1, "One"),
-                                                   (2, "Two"),
-                                                   (3, "Three"),
-                                                   (4, "Four"),
-                                                   (5, "Five")))
+    zone = models.CharField(max_length=64,
+                            default=1,
+                            choices=[('GH', 'Green house'),
+                                     ('Z1', 'Zone One'),
+                                     ('Z2', 'Zone Two'),
+                                     ('Z3', 'Zone Three'),
+                                     ('Z4', 'Zone Four'),
+                                     ('Z5', 'Zone Five'),
+                                     ('ID', 'Indoors')])
     bed_number = models.IntegerField()
 
     def __str__(self):
@@ -51,3 +55,5 @@ class Planted(models.Model):
     seed = models.ForeignKey(Seeds, on_delete=models.CASCADE, related_name='name2')
     location = models.ForeignKey(PlantingBeds, on_delete=models.CASCADE, related_name='bed_number2')
     date = models.DateField()
+    date_germination = models.DateField(default="2022-05-04", blank=True)
+    date_harvest = models.DateField(default="2022-05-04", blank=True)
