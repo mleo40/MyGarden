@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Seeds, PlantingBeds, Planted
 from django.forms import ModelForm
+import datetime
 
 
 class SeedForm(ModelForm):
@@ -20,6 +21,7 @@ def seeds(requests):
         form = SeedForm(requests.POST)
         if form.is_valid:
             form.save()
+    calculate_dates(seed_data)
     return render(requests, 'seeds/seeds.html', {
         'seeds': seed_data,
         'form': SeedForm(),
@@ -52,3 +54,12 @@ def name_clean_up(data):
     Clean up users input
     """
     print(data)
+
+
+def calculate_dates(data):
+    """
+    Forcast dates based on seed data
+    """
+    for item in data:
+        item.germination = item.date_on_packet + datetime.timedelta(days=item.germination)
+        item.harvest = item.date_on_packet + datetime.timedelta(days=item.harvest)
