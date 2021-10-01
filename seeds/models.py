@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Seeds(models.Model):
@@ -53,6 +54,9 @@ class Planted(models.Model):
     id = models.AutoField(primary_key=True)
     seed = models.ForeignKey(Seeds, on_delete=models.CASCADE, related_name='planteds')
     location = models.ForeignKey(PlantingBeds, on_delete=models.CASCADE, related_name='planteds')
-    date = models.DateField()
+    date = models.DateField(default=timezone.now, blank=True)
     date_germination = models.DateField(default="2022-05-04", blank=True)
     date_harvest = models.DateField(default="2022-05-04", blank=True)
+
+    def __str__(self):
+        return f"{self.seed} {self.location}"
