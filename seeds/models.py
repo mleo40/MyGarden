@@ -1,6 +1,5 @@
 from django.db import models
 
-import datetime
 
 class Seeds(models.Model):
     """
@@ -24,7 +23,7 @@ class Seeds(models.Model):
     harvest = models.IntegerField()
 
     def __str__(self):
-        return f"{self.name} {self.subname} {self.harvest} {self.light} {self.harvest} {self.germination}"
+        return f"{self.name} {self.subname}"
 
 
 class PlantingBeds(models.Model):
@@ -52,8 +51,8 @@ class Planted(models.Model):
     What's actually been planted
     """
     id = models.AutoField(primary_key=True)
-    seed = models.ForeignKey(Seeds, on_delete=models.CASCADE, related_name='name2')
-    location = models.ForeignKey(PlantingBeds, on_delete=models.CASCADE, related_name='bed_number2')
+    seed = models.ForeignKey(Seeds, on_delete=models.CASCADE, related_name='planteds')
+    location = models.ForeignKey(PlantingBeds, on_delete=models.CASCADE, related_name='planteds')
     date = models.DateField()
     date_germination = models.DateField(default="2022-05-04", blank=True)
     date_harvest = models.DateField(default="2022-05-04", blank=True)

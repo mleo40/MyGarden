@@ -26,4 +26,10 @@
 
         {% endfor %}
     </table>
+
+    <h1>Add a new seed below:</h1>
+    <form action="{%   url 'seeds' %}" method="post">
+        {%  csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Add Seed">
 {% endblock %}

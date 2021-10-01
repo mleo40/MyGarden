@@ -1,6 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Seeds, PlantingBeds, Planted
+from django.forms import ModelForm
+
+
+class SeedForm(ModelForm):
+    class Meta:
+        model = Seeds
+        fields = ['name', 'subname', 'harvest', 'sow', 'germination', 'description', 'depth', 'light', 'spacing', 'date_on_packet']
 
 
 def index(requests):
@@ -9,10 +16,13 @@ def index(requests):
 
 def seeds(requests):
     seed_data = Seeds.objects.all()
-    for seed in seed_data:
-        print(seed)
+    if requests.method == "POST":
+        form = SeedForm(requests.POST)
+        if form.is_valid:
+            form.save()
     return render(requests, 'seeds/seeds.html', {
-        "seeds": Seeds.objects.all()
+        'seeds': seed_data,
+        'form': SeedForm(),
     })
 
 
@@ -35,3 +45,10 @@ def planted(requests):
     return render(requests, 'seeds/planted.html', {
         "planted": Planted.objects.all(),
     })
+
+
+def name_clean_up(data):
+    """
+    Clean up users input
+    """
+    print(data)
