@@ -49,6 +49,7 @@ class PlantingBeds(models.Model):
                                      ('Z5', 'Zone Five'),
                                      ('ID', 'Indoors')])
     bed_number = models.IntegerField()
+#    things_planted_here = models.ManyToManyField(Planted, on_delete=models.CASCADE, related_name='plantingbedss')
 
     def __str__(self):
         return f"{self.zone} {self.bed_number}"

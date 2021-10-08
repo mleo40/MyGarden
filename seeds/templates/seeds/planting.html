@@ -6,24 +6,12 @@
 <h1>This is the purpose of this app (but it doesn't do anything yet!!)!!</h1>
         <p><a href = {% url 'index' %}>Home Page</a></p>
 
-    <form action={%  url 'planting' %} method="post">
-        {%  csrf_token %}
-        <select name="seed" id="seed">
-            {%  for seed in seeds %}
-                <option value="{{  seed }}"> {{ seed }}</option>
-            {% endfor %}
-        </select>
-        <select name="location" id="location">
-            {%  for bed in beds %}
-                 <option value="{{  bed }}">  {{ bed }}</option>
-             {% endfor %}
-        </select>
-        <label for="Planted Date">Planted Date:</label>
-        <input type="date" id="planted_date" name="planted_date">
-
-        <input type="submit" value="PLANT!"/>
-    </form>
-
+        <h1>Add a new planting below:</h1>
+        <form action="{%   url 'planting' %}" method="post">
+            {%  csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Add Planting">
+        </form>
 
     </br>
     </br>

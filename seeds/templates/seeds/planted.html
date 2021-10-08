@@ -11,7 +11,7 @@
     <tr>
         <th>Seed</th>
         <th>Location</th>
-        <th>Planted Date</th>
+        <th>Date Planted</th>
         <th>Germination Date</th>
         <th>Harvest Date</th>
     </tr>
@@ -26,5 +26,13 @@
         </tr>
     {%  endfor %}
     </table>
+
+    <h1>Add a new planting below:</h1>
+        <form action="{%   url 'planted' %}" method="post">
+            {%  csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Add Planting">
+        </form>
+
 
 {% endblock %}

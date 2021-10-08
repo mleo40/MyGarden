@@ -31,7 +31,13 @@ class SeedForm(ModelForm):
 class PlantedForm(ModelForm):
     class Meta:
         model = Planted
-        fields = ['seed', 'location']
+        fields = ['seed', 'date', 'location']
+
+
+class PlantingBedForm(ModelForm):
+    class Meta:
+        model = Planted
+        fields = ['bed_number', 'things_planted_here']
 
 
 def index(requests):
@@ -51,33 +57,26 @@ def seeds(requests):
 
 def beds(requests):
     return render(requests, 'seeds/beds.html', {
-        "beds": PlantingBeds.objects.all()
+        "beds": PlantingBeds.objects.all().order_by('zone'),
     })
 
 
 def planting(requests):
-    if requests.method == "POST":
-        form = PlantedForm(requests.POST)
-        if form.is_valid:
-            form.save()
     return render(requests, 'seeds/planting.html', {
-        "seeds": Seeds.objects.all(),
-        "beds": PlantingBeds.objects.all(),
+        "planting": Planted.objects.all(),
     })
 
 
 def planted(requests):
-    planted_now = Planted.objects.all()
-
+    if requests.method == "POST":
+        form = PlantedForm(requests.POST)
+        ### DO MATH HERE
+        if form.is_valid:
+            form.save()
     return render(requests, 'seeds/planted.html', {
-        "planted":  Planted.objects.all()
+        'planted':  Planted.objects.all().order_by('seed'),
+        'form': PlantedForm(),
     })
-
-
-def name_clean_up(data):
-    """
-    Clean up users input
-    """
 
 
 def calculate_dates(data):
@@ -88,10 +87,3 @@ def calculate_dates(data):
         item.germination = item.date + datetime.timedelta(days=10)
         item.harvest = item.date + datetime.timedelta(days=45)
     return data
-
-
-def sort_by_name(data):
-    """
-    An attempt to sort things by name
-    """
-
