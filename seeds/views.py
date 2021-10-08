@@ -7,7 +7,25 @@ import datetime
 class SeedForm(ModelForm):
     class Meta:
         model = Seeds
-        fields = ['name', 'subname', 'harvest', 'sow', 'germination', 'description', 'depth', 'light', 'spacing', 'date_on_packet']
+        fields = ['name',
+                  'subname',
+                  'date_on_packet',
+                  'description',
+                  'sow',
+                  'depth',
+                  'spacing',
+                  'light',
+                  'water',
+                  'germination',
+                  'harvest',
+                  ]
+
+# trying to uppercase everything:
+#    def clean(self):
+#        try:
+#            return dict([(k, v.strip().upper()) for k, v in self.cleaned_data.items()])
+#        except AttributeError:
+#            pass
 
 
 class PlantedForm(ModelForm):
@@ -21,13 +39,12 @@ def index(requests):
 
 
 def seeds(requests):
-    seed_data = Seeds.objects.all()
     if requests.method == "POST":
         form = SeedForm(requests.POST)
         if form.is_valid:
             form.save()
     return render(requests, 'seeds/seeds.html', {
-        'seeds': seed_data,
+        'seeds': Seeds.objects.all().order_by('name'),
         'form': SeedForm(),
     })
 
@@ -51,9 +68,7 @@ def planting(requests):
 
 def planted(requests):
     planted_now = Planted.objects.all()
-    calculate_dates(planted_now)
-    print(planted_now)
-    # need to calculate date from planted_date and germination/harvest days...somehow
+
     return render(requests, 'seeds/planted.html', {
         "planted":  Planted.objects.all()
     })
@@ -73,3 +88,10 @@ def calculate_dates(data):
         item.germination = item.date + datetime.timedelta(days=10)
         item.harvest = item.date + datetime.timedelta(days=45)
     return data
+
+
+def sort_by_name(data):
+    """
+    An attempt to sort things by name
+    """
+

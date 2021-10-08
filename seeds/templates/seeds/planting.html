@@ -4,18 +4,26 @@
 {% block body %}
 
 <h1>This is the purpose of this app (but it doesn't do anything yet!!)!!</h1>
-<select name="seed" id="seed">
-    {%  for seed in seeds %}
-        <option value="{{  seed }}"> {{ seed }}</option>
-    {% endfor %}
-</select>
-<select name="bed" id="bed">
-    {%  for bed in beds %}
-        <option value="{{  bed }}">  {{ bed }}</option>
-    {% endfor %}
-</select>
+        <p><a href = {% url 'index' %}>Home Page</a></p>
 
-    <input type="submit" value="PLANT!"/>
+    <form action={%  url 'planting' %} method="post">
+        {%  csrf_token %}
+        <select name="seed" id="seed">
+            {%  for seed in seeds %}
+                <option value="{{  seed }}"> {{ seed }}</option>
+            {% endfor %}
+        </select>
+        <select name="location" id="location">
+            {%  for bed in beds %}
+                 <option value="{{  bed }}">  {{ bed }}</option>
+             {% endfor %}
+        </select>
+        <label for="Planted Date">Planted Date:</label>
+        <input type="date" id="planted_date" name="planted_date">
+
+        <input type="submit" value="PLANT!"/>
+    </form>
+
 
     </br>
     </br>

@@ -6,9 +6,15 @@ class Seeds(models.Model):
     """
     Data for seeds
     """
-    light_options = (("1", "shade"),
-                     ("2", "partial sun"),
-                     ("3", "full sun")
+    light_options = (("Full sun", "Full sun"),
+                     ("Partial sun", "Partial sun"),
+                     ("Shade", "Shade"),
+                     ("Green house", "Green House")
+                     )
+
+    water_options = (("Minimal", "Minimal"),
+                     ("Normal", "Normal"),
+                     ("Heavy", "Heavy"),
                      )
 
     id = models.AutoField(primary_key=True)
@@ -16,10 +22,11 @@ class Seeds(models.Model):
     sow = models.DateField(default="2022-05-04")
     subname = models.CharField(max_length=64, blank=True)
     description = models.CharField(max_length=128)
-    germination = models.IntegerField(blank=True)
-    date_on_packet = models.DateField(blank=True)
+    germination = models.IntegerField()
+    date_on_packet = models.DateField()
     depth = models.CharField(max_length=10)
-    light = models.CharField(max_length=1, choices=light_options, blank=True)
+    light = models.CharField(max_length=20, choices=light_options, default="Full Sun")
+    water = models.CharField(max_length=10, choices=water_options, blank=True)
     spacing = models.CharField(max_length=10)
     harvest = models.IntegerField()
 

@@ -3,12 +3,19 @@
 <title>Seeds</title>
 
 {% block body %}
+    <h1>Seed inventory page</h1>
+    <p><a href = {% url 'index' %}>Home Page</a></p>
     <table>
         <tr>
             <th>Name</th>
             <th>Subname</th>
+            <th>Date on Packet/bought</th>
             <th>Description</th>
             <th>Sow</th>
+            <th>Depth</th>
+            <th>Spacing</th>
+            <th>Light</th>
+            <th>Water</th>
             <th>Germination</th>
             <th>Harvest</th>
         </tr>
@@ -18,8 +25,13 @@
         <tr>
             <td>{{ seed.name }} </td>
             <td>{{ seed.subname }} </td>
+            <td>{{ seed.date_on_packet }} </td>
             <td>{{ seed.description }} </td>
             <td>{{ seed.sow }} </td>
+            <td>{{ seed.depth }} </td>
+            <td>{{ seed.spacing }} </td>
+            <td>{{ seed.light }} </td>
+            <td>{{ seed.water }} </td>
             <td>{{ seed.germination }}</td>
             <td>{{ seed.harvest }} </td>
         </tr>
