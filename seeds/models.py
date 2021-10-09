@@ -18,6 +18,7 @@ class Seeds(models.Model):
                      )
 
     id = models.AutoField(primary_key=True)
+    brand = models.CharField(max_length=128, blank=True)
     name = models.CharField(max_length=64)
     sow = models.DateField(default="2022-05-04")
     subname = models.CharField(max_length=64, blank=True)
@@ -29,6 +30,9 @@ class Seeds(models.Model):
     water = models.CharField(max_length=10, choices=water_options, blank=True)
     spacing = models.CharField(max_length=10)
     harvest = models.IntegerField()
+
+    class Meta:
+        constraints = [models.constraints.UniqueConstraint(fields=['name', 'subname'], name='Uniqueseed')]
 
     def __str__(self):
         return f"{self.name} {self.subname}"
@@ -49,7 +53,7 @@ class PlantingBeds(models.Model):
                                      ('Z5', 'Zone Five'),
                                      ('ID', 'Indoors')])
     bed_number = models.IntegerField()
-#    things_planted_here = models.ManyToManyField(Planted, on_delete=models.CASCADE, related_name='plantingbedss')
+    things_planted_here = models.ManyToManyField("Planted", related_name='plantingbedss')
 
     def __str__(self):
         return f"{self.zone} {self.bed_number}"

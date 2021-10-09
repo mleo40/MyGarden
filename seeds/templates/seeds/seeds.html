@@ -1,13 +1,14 @@
 {% extends 'seeds/layout.html' %}
 
-<title>Seeds</title>
 
 {% block body %}
+    <title>Seeds</title>
     <h1>Seed inventory page</h1>
     <p><a href = {% url 'index' %}>Home Page</a></p>
     <table>
         <tr>
             <th>Name</th>
+            <th>Brand</th>
             <th>Subname</th>
             <th>Date on Packet/bought</th>
             <th>Description</th>
@@ -24,6 +25,7 @@
 
         <tr>
             <td>{{ seed.name }} </td>
+            <td>{{ seed.brand }} </td>
             <td>{{ seed.subname }} </td>
             <td>{{ seed.date_on_packet }} </td>
             <td>{{ seed.description }} </td>

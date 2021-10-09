@@ -9,6 +9,7 @@ class SeedForm(ModelForm):
         model = Seeds
         fields = ['name',
                   'subname',
+                  'brand',
                   'date_on_packet',
                   'description',
                   'sow',
@@ -34,10 +35,10 @@ class PlantedForm(ModelForm):
         fields = ['seed', 'date', 'location']
 
 
-class PlantingBedForm(ModelForm):
-    class Meta:
-        model = Planted
-        fields = ['bed_number', 'things_planted_here']
+#class PlantingBedForm(ModelForm):
+#    class Meta:
+#        model = Planted
+#        fields = ['bed_number', 'zone']
 
 
 def index(requests):
