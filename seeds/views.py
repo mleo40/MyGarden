@@ -35,10 +35,10 @@ class PlantedForm(ModelForm):
         fields = ['seed', 'date', 'location']
 
 
-#class PlantingBedForm(ModelForm):
-#    class Meta:
-#        model = Planted
-#        fields = ['bed_number', 'zone']
+class PlantingBedForm(ModelForm):
+    class Meta:
+        model = PlantingBeds
+        fields = ['zone', 'bed_number']
 
 
 def index(requests):
@@ -57,8 +57,13 @@ def seeds(requests):
 
 
 def beds(requests):
+    if requests.method == "POST":
+        form = PlantingBedForm(requests.POST)
+        if form.is_valid():
+            form.save
     return render(requests, 'seeds/beds.html', {
-        "beds": PlantingBeds.objects.all().order_by('zone'),
+        'beds': PlantingBeds.objects.all().order_by('zone'),
+        'form': PlantingBedForm(),
     })
 
 
@@ -71,7 +76,11 @@ def planting(requests):
 def planted(requests):
     if requests.method == "POST":
         form = PlantedForm(requests.POST)
+
         ### DO MATH HERE
+        # get germination and harvast days
+        # add them to the date_planted
+        # append planted with calculated dates
         if form.is_valid:
             form.save()
     return render(requests, 'seeds/planted.html', {

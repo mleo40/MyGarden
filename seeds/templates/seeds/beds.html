@@ -9,17 +9,27 @@
     <tr>
         <th>Zone</th>
         <th>Bed Number</th>
+        <th>Things Planted</th>
     </tr>
 
     {% for bed in beds %}
     <tr>
         <td>{{ bed.zone }}</td>
         <td>{{ bed.bed_number }}</td>
+        <td>{% for thing in bed.things_planted_here.all %} {{ thing }},  {% endfor %}</td>
     </tr>
     {% endfor %}
-    {{ form.as_p }}
-
 </table>
+    <h1>Add a new planting bed below:</h1>
+    <form action="{%   url 'beds' %}" method="post">
+        {%  csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Add New Planting Bed">
+    </form>
+
+    </br>
+    </br>
+    </br>
 <img src="{% static 'seeds/images/the_garden.jpg' %}" alt="A Picture of My Garden"/>
 {% endblock %}
 

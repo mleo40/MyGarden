@@ -53,7 +53,10 @@ class PlantingBeds(models.Model):
                                      ('Z5', 'Zone Five'),
                                      ('ID', 'Indoors')])
     bed_number = models.IntegerField()
-    things_planted_here = models.ManyToManyField("Planted", related_name='plantingbedss')
+    things_planted_here = models.ManyToManyField("Planted", related_name='plantingbedss', blank=True)
+
+    class Meta:
+        constraints = [models.constraints.UniqueConstraint(fields=['zone', 'bed_number'], name='Uniquezonebed')]
 
     def __str__(self):
         return f"{self.zone} {self.bed_number}"
