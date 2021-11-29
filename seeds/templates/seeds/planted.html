@@ -1,0 +1,38 @@
+{% extends 'seeds/layout.html' %}
+{% load static %}
+
+
+{%  block body %}
+    <title>Plantings</title>
+    <h1>All the wonderfulness you've already planted!</h1>
+    <p><a href = {% url 'index' %}>Home Page</a></p>
+
+    <table>
+    <tr>
+        <th>Seed</th>
+        <th>Location</th>
+        <th>Date Planted</th>
+        <th>Germination Date</th>
+        <th>Harvest Date</th>
+    </tr>
+
+    {% for plant in planted %}
+        <tr>
+        <td>{{ plant.seed }}</td>
+        <td>{{ plant.location }}</td>
+        <td>{{ plant.date }}</td>
+        <td>{{ plant.date_germination }}</td>
+        <td>{{ plant.date_harvest }}</td>
+        </tr>
+    {%  endfor %}
+    </table>
+
+    <h1>Add a new planting below:</h1>
+        <form action="{%   url 'planted' %}" method="post">
+            {%  csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Add Planting">
+        </form>
+
+
+{% endblock %}

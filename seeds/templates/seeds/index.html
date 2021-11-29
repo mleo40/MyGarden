@@ -1,0 +1,12 @@
+{% extends 'seeds/layout.html'%}
+{% load static %}
+
+{% block body %}
+    <title>My Garden</title>
+<h1>MyGarden Home Page</h1>
+<p><a href = {% url 'seeds' %}>Seeds</a></p>
+<p><a href = {% url 'beds' %}>Beds</a></p>
+<p><a href = {% url 'planted' %}>Plantings</a></p>
+    </br>
+<img src="{% static 'seeds/images/the_garden.jpg' %}" alt="A Picture of My Garden"/>
+{% endblock %}

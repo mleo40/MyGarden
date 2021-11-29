@@ -1,0 +1,49 @@
+{% extends 'seeds/layout.html' %}
+
+
+{% block body %}
+    <title>Seeds</title>
+    <h1>Seed inventory page</h1>
+    <p><a href = {% url 'index' %}>Home Page</a></p>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Subname</th>
+            <th>Date on Packet/bought</th>
+            <th>Description</th>
+            <th>Sow</th>
+            <th>Depth</th>
+            <th>Spacing</th>
+            <th>Light</th>
+            <th>Water</th>
+            <th>Germination</th>
+            <th>Harvest</th>
+        </tr>
+
+        {% for seed in seeds %}
+
+        <tr>
+            <td>{{ seed.name }} </td>
+            <td>{{ seed.brand }} </td>
+            <td>{{ seed.subname }} </td>
+            <td>{{ seed.date_on_packet }} </td>
+            <td>{{ seed.description }} </td>
+            <td>{{ seed.sow }} </td>
+            <td>{{ seed.depth }} </td>
+            <td>{{ seed.spacing }} </td>
+            <td>{{ seed.light }} </td>
+            <td>{{ seed.water }} </td>
+            <td>{{ seed.germination }}</td>
+            <td>{{ seed.harvest }} </td>
+        </tr>
+
+        {% endfor %}
+    </table>
+
+    <h1>Add a new seed below:</h1>
+    <form action="{%   url 'seeds' %}" method="post">
+        {%  csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Add Seed">
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'seeds/layout.html' %}
+{%  load static %}
+
+{% block body %}
+    <title>Plantings</title>
+
+<h1>This is the purpose of this app (but it doesn't do anything yet!!)!!</h1>
+        <p><a href = {% url 'index' %}>Home Page</a></p>
+
+        <h1>Add a new planting below:</h1>
+        <form action="{%   url 'planting' %}" method="post">
+            {%  csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Add Planting">
+        </form>
+
+    </br>
+    </br>
+<img src="{% static 'seeds/images/the_garden.jpg' %}" alt="A Picture of My Garden"/>
+
+{% endblock %}
